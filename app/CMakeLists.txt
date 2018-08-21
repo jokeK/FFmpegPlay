@@ -1,0 +1,119 @@
+
+cmake_minimum_required(VERSION 3.4.1)
+
+add_library(
+             native-lib
+             SHARED
+             src/main/cpp/MikPlayer.cpp
+             src/main/cpp/native-lib.cpp
+             src/main/cpp/FFmpegMusic.cpp )
+
+set(libs ${CMAKE_SOURCE_DIR}/libs/armeabi-v7a)
+include_directories(src/main/cpp/include)
+#以导入的形式引入库
+add_library(
+    avcodec
+    SHARED
+    IMPORTED
+)
+set_target_properties(
+    avcodec
+    PROPERTIES
+    IMPORTED_LOCATION
+    ${libs}/libavcodec.so
+)
+add_library(
+    avdevice
+    SHARED
+    IMPORTED
+)
+set_target_properties(
+    avdevice
+    PROPERTIES
+    IMPORTED_LOCATION
+    ${libs}/libavdevice.so
+)
+add_library(
+    avfilter
+    SHARED
+    IMPORTED
+)
+set_target_properties(
+    avfilter
+    PROPERTIES
+    IMPORTED_LOCATION
+    ${libs}/libavfilter.so
+)
+add_library(
+    avformat
+    SHARED
+    IMPORTED
+)
+set_target_properties(
+    avformat
+    PROPERTIES
+    IMPORTED_LOCATION
+    ${libs}/libavformat.so
+)
+add_library(
+    avutil
+    SHARED
+    IMPORTED
+)
+set_target_properties(
+    avutil
+    PROPERTIES
+    IMPORTED_LOCATION
+    ${libs}/libavutil.so
+)
+add_library(
+    postproc
+    SHARED
+    IMPORTED
+)
+set_target_properties(
+    postproc
+    PROPERTIES
+    IMPORTED_LOCATION
+    ${libs}/libpostproc.so
+)
+add_library(
+    swresample
+    SHARED
+    IMPORTED
+)
+set_target_properties(
+    swresample
+    PROPERTIES
+    IMPORTED_LOCATION
+    ${libs}/libswresample.so
+)
+add_library(
+    swscale
+    SHARED
+    IMPORTED
+)
+set_target_properties(
+    swscale
+    PROPERTIES
+    IMPORTED_LOCATION
+    ${libs}/libswscale.so
+)
+
+find_library(
+              log-lib
+              log )
+
+target_link_libraries(
+                       native-lib
+                       avcodec
+                       avdevice
+                       avfilter
+                       avformat
+                       avutil
+                       postproc
+                       swresample
+                       swscale
+                       android
+                       OpenSLES
+                       ${log-lib} )

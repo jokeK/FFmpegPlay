@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">FFmpegPlay</string>
+    <string-array name="video_list">
+        <item>input.mp4</item>
+        <item>a.avi</item>
+        <item>b.mkv</item>
+        <item>c.flv</item>
+        <item>iphone.MOV</item>
+    </string-array>
+</resources>
